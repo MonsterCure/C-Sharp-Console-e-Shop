@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+
 using Console_e_Shop_Library.Extensions;
 
 namespace Console_e_Shop_Library.Entities

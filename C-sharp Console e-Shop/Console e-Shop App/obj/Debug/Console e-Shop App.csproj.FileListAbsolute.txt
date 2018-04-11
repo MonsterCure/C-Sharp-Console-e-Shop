@@ -17,3 +17,13 @@ C:\Users\Earendil\Downloads\SEDC\Ca - Homework Back-end\C-sharp Homework 08\C-sh
 C:\Users\Earendil\Downloads\SEDC\Ca - Homework Back-end\C-sharp Homework 08\C-sharp Advanced HW 01\Console e-Shop App\obj\Debug\Console e-Shop App.csproj.CopyComplete
 C:\Users\Earendil\Downloads\SEDC\Ca - Homework Back-end\C-sharp Homework 08\C-sharp Advanced HW 01\Console e-Shop App\obj\Debug\Console e-Shop App.exe
 C:\Users\Earendil\Downloads\SEDC\Ca - Homework Back-end\C-sharp Homework 08\C-sharp Advanced HW 01\Console e-Shop App\obj\Debug\Console e-Shop App.pdb
+C:\Users\Earendil\Downloads\SEDC\Ca - Homework Back-end\C-sharp Homework 09\C-sharp Console e-Shop\Console e-Shop App\bin\Debug\Console e-Shop App.exe.config
+C:\Users\Earendil\Downloads\SEDC\Ca - Homework Back-end\C-sharp Homework 09\C-sharp Console e-Shop\Console e-Shop App\bin\Debug\Console e-Shop App.exe
+C:\Users\Earendil\Downloads\SEDC\Ca - Homework Back-end\C-sharp Homework 09\C-sharp Console e-Shop\Console e-Shop App\bin\Debug\Console e-Shop App.pdb
+C:\Users\Earendil\Downloads\SEDC\Ca - Homework Back-end\C-sharp Homework 09\C-sharp Console e-Shop\Console e-Shop App\bin\Debug\Console e-Shop Library.dll
+C:\Users\Earendil\Downloads\SEDC\Ca - Homework Back-end\C-sharp Homework 09\C-sharp Console e-Shop\Console e-Shop App\bin\Debug\Console e-Shop Library.pdb
+C:\Users\Earendil\Downloads\SEDC\Ca - Homework Back-end\C-sharp Homework 09\C-sharp Console e-Shop\Console e-Shop App\obj\Debug\Console e-Shop App.csprojResolveAssemblyReference.cache
+C:\Users\Earendil\Downloads\SEDC\Ca - Homework Back-end\C-sharp Homework 09\C-sharp Console e-Shop\Console e-Shop App\obj\Debug\Console e-Shop App.csproj.CoreCompileInputs.cache
+C:\Users\Earendil\Downloads\SEDC\Ca - Homework Back-end\C-sharp Homework 09\C-sharp Console e-Shop\Console e-Shop App\obj\Debug\Console e-Shop App.csproj.CopyComplete
+C:\Users\Earendil\Downloads\SEDC\Ca - Homework Back-end\C-sharp Homework 09\C-sharp Console e-Shop\Console e-Shop App\obj\Debug\Console e-Shop App.exe
+C:\Users\Earendil\Downloads\SEDC\Ca - Homework Back-end\C-sharp Homework 09\C-sharp Console e-Shop\Console e-Shop App\obj\Debug\Console e-Shop App.pdb

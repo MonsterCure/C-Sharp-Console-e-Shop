@@ -1,6 +1,0 @@
-C:\Users\Earendil\Documents\GitHub\C-Sharp-Console-e-Shop\C-sharp Console e-Shop\Console e-Shop Library\bin\Debug\Console e-Shop Library.dll
-C:\Users\Earendil\Documents\GitHub\C-Sharp-Console-e-Shop\C-sharp Console e-Shop\Console e-Shop Library\bin\Debug\Console e-Shop Library.pdb
-C:\Users\Earendil\Documents\GitHub\C-Sharp-Console-e-Shop\C-sharp Console e-Shop\Console e-Shop Library\obj\Debug\Console e-Shop Library.csprojResolveAssemblyReference.cache
-C:\Users\Earendil\Documents\GitHub\C-Sharp-Console-e-Shop\C-sharp Console e-Shop\Console e-Shop Library\obj\Debug\Console e-Shop Library.csproj.CoreCompileInputs.cache
-C:\Users\Earendil\Documents\GitHub\C-Sharp-Console-e-Shop\C-sharp Console e-Shop\Console e-Shop Library\obj\Debug\Console e-Shop Library.dll
-C:\Users\Earendil\Documents\GitHub\C-Sharp-Console-e-Shop\C-sharp Console e-Shop\Console e-Shop Library\obj\Debug\Console e-Shop Library.pdb

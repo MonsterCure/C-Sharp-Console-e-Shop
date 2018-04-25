@@ -59,10 +59,10 @@ namespace Console_e_Shop_Library.Repositories
         #endregion
 
         #region Get the vendors names method
-        public static void GetVendorsNames(Dictionary<string, List<Product>> vendorsAndProducts)
+        public static void GetVendorsNames()
         {
             Message.Print("This is the list of vendors:", ConsoleColor.Yellow);
-            foreach (var item in vendorsAndProducts)
+            foreach (var item in VendorsAndProducts)
             {
                 WriteLine($"{item.Key}\n");
             }
@@ -71,9 +71,9 @@ namespace Console_e_Shop_Library.Repositories
         #endregion
 
         #region Get all products method
-        public static void GetAllProducts(Dictionary<string, List<Product>> vendorsAndProducts)
+        public static void GetAllProducts()
         {
-            List<Product> allProductsList = GetAllProductsAsList(vendorsAndProducts);
+            List<Product> allProductsList = GetAllProductsAsList();
             string allProducts = allProductsList.PrintProductList();
             Message.Print($"These are all the available products from all the vendors:", ConsoleColor.Yellow);
             WriteLine($"{allProducts}{Message.textDivider}");
@@ -81,9 +81,9 @@ namespace Console_e_Shop_Library.Repositories
         #endregion
 
         #region Get all products as a list method
-        public static List<Product> GetAllProductsAsList(Dictionary<string, List<Product>> vendorsAndProducts)
+        public static List<Product> GetAllProductsAsList()
         {
-            List<Product> allProductsList = vendorsAndProducts.SelectMany(kvp => kvp.Value).ToList();
+            List<Product> allProductsList = VendorsAndProducts.SelectMany(kvp => kvp.Value).ToList();
             return allProductsList;
         }
         #endregion

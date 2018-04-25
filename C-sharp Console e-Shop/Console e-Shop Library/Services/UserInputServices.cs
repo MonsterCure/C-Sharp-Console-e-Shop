@@ -41,10 +41,10 @@ namespace Console_e_Shop_Library.Services
         #endregion
 
         #region Get a vendor's products method (by vendor name)
-        public static void GetVendorsProducts(Dictionary<string, List<Product>> vendorsAndProducts, string vendorName)
+        public static void GetVendorsProducts(string vendorName)
         {
-            List<Product> filteredProductsList = GetVendorsProductsAsList(vendorsAndProducts, vendorName);
-            string vendorNameKey = vendorsAndProducts.Where(kvp => kvp.Key.ToLower().Contains(vendorName.ToLower())).FirstOrDefault().Key;
+            List<Product> filteredProductsList = GetVendorsProductsAsList(vendorName);
+            string vendorNameKey = VendorsRepository.VendorsAndProducts.Where(kvp => kvp.Key.ToLower().Contains(vendorName.ToLower())).FirstOrDefault().Key;
             if (!vendorName.ToLower().Trim().Contains(" ") && vendorName.ToLower().Trim().Contains("ore"))
             {
                 vendorNameKey = "\"Stationery Store\", \"Furniture Store\" and \"Clothes Store\"";
@@ -63,9 +63,9 @@ namespace Console_e_Shop_Library.Services
         #endregion
 
         #region Get a vendor's products as a list method (by vendor name)
-        public static List<Product> GetVendorsProductsAsList(Dictionary<string, List<Product>> vendorsAndProducts, string vendorName)
+        public static List<Product> GetVendorsProductsAsList(string vendorName)
         {
-            List<Product> filteredProductsList = vendorsAndProducts.Where(kvp => kvp.Key.ToLower().Contains(vendorName.ToLower())).SelectMany(kvp => kvp.Value).ToList();
+            List<Product> filteredProductsList = VendorsRepository.VendorsAndProducts.Where(kvp => kvp.Key.ToLower().Contains(vendorName.ToLower())).SelectMany(kvp => kvp.Value).ToList();
             if (filteredProductsList != null)
             {
                 return filteredProductsList;
@@ -78,9 +78,9 @@ namespace Console_e_Shop_Library.Services
         #endregion
 
         #region Get products by name method
-        public static void GetProductsByName(Dictionary<string, List<Product>> vendorsAndProducts, string productName)
+        public static void GetProductsByName(string productName)
         {
-            List<Product> filteredProductsList = GetProductsByNameAsList(vendorsAndProducts, productName);
+            List<Product> filteredProductsList = GetProductsByNameAsList(productName);
             if (filteredProductsList != null)
             {
                 string filteredProducts = filteredProductsList.PrintProductList();
@@ -95,11 +95,11 @@ namespace Console_e_Shop_Library.Services
         #endregion
 
         #region Get products by name as a list method
-        public static List<Product> GetProductsByNameAsList(Dictionary<string, List<Product>> vendorsAndProducts, string productName)
+        public static List<Product> GetProductsByNameAsList(string productName)
         {
-            string[] productNames = vendorsAndProducts.SelectMany(kvp => kvp.Value).Select(product => product.ProductName.ToString()).ToArray();
-            string productNameChecked = vendorsAndProducts.SelectMany(kvp => kvp.Value).Where(product => product.ProductName.Split(' ').Contains(productName)).FirstOrDefault().ProductName;
-            List<Product> filteredProductsList = vendorsAndProducts.SelectMany(kvp => kvp.Value).Where(product => product.ProductName.Split(' ').Contains(productName)).ToList();
+            string[] productNames = VendorsRepository.VendorsAndProducts.SelectMany(kvp => kvp.Value).Select(product => product.ProductName.ToString()).ToArray();
+            string productNameChecked = VendorsRepository.VendorsAndProducts.SelectMany(kvp => kvp.Value).Where(product => product.ProductName.Split(' ').Contains(productName)).FirstOrDefault().ProductName;
+            List<Product> filteredProductsList = VendorsRepository.VendorsAndProducts.SelectMany(kvp => kvp.Value).Where(product => product.ProductName.Split(' ').Contains(productName)).ToList();
             if (filteredProductsList != null)
             {
                 return filteredProductsList;
@@ -112,20 +112,22 @@ namespace Console_e_Shop_Library.Services
         #endregion
 
         #region Get products by search input method
-        public static void GetProductsBySearchInput(Dictionary<string, List<Product>> vendorsAndProducts, string[] searchParameters)
+        public static void GetProductsBySearchInput(string[] searchParameters)
         {
             IEnumerable<Product> filteredProductsList;
             List<Product> orderedProductsList;
-            string vendorName = vendorsAndProducts.Where(kvp => kvp.Key.ToLower().Contains(searchParameters[1].ToLower())).FirstOrDefault().Key;
-            //string productName = vendorsAndProducts.SelectMany(kvp => kvp.Value).Where(product => product.ProductName.ToLower().Split(' ').Contains(searchParameters[1].ToLower())).FirstOrDefault().ProductName;
-            string[] productNames = vendorsAndProducts.SelectMany(kvp => kvp.Value).Select(product => product.ProductName.ToString()).ToArray();
+            string vendorName = VendorsRepository.VendorsAndProducts.Where(kvp => kvp.Key.ToLower().Contains(searchParameters[1].ToLower())).FirstOrDefault().Key;
+            //string productName = VendorsRepository.VendorsAndProducts.SelectMany(kvp => kvp.Value).Where(product => product.ProductName.ToLower().Split(' ').Contains(searchParameters[1].ToLower())).FirstOrDefault().ProductName;
+            string[] productNames = VendorsRepository.VendorsAndProducts.SelectMany(kvp => kvp.Value).Select(product => product.ProductName.ToString()).ToArray();
             if (searchParameters[0].ToLower() == "v" && vendorName != null)
             {
-                filteredProductsList = vendorsAndProducts.Where(kvp => kvp.Key.ToLower().Contains(searchParameters[1].ToLower())).SelectMany(kvp => kvp.Value);
+                filteredProductsList = VendorsRepository.VendorsAndProducts.Where(kvp => kvp.Key.ToLower().Contains(searchParameters[1].ToLower())).SelectMany(kvp => kvp.Value);
             }
             else if (searchParameters[0].ToLower() == "p" && productNames.Contains(searchParameters[1]))
             {
-                filteredProductsList = vendorsAndProducts.SelectMany(kvp => kvp.Value).Where(product => product.ProductName.ToLower().Split(' ').Contains(searchParameters[1].ToLower()));
+                filteredProductsList = VendorsRepository.VendorsAndProducts.SelectMany(kvp => kvp.Value)
+                    .Where(product => product.ProductName.ToLower().Split(' ').ToList()
+                        .Any(word => word.Contains(searchParameters[1].ToLower())));
             }
             else
             {
@@ -173,18 +175,18 @@ namespace Console_e_Shop_Library.Services
         #endregion
 
         #region Search product catalog method
-        public static void SearchProductCatalog(Dictionary<string, List<Product>> vendorsAndProducts)
+        public static void SearchProductCatalog()
         {
-            VendorsRepository.GetAllProducts(vendorsAndProducts);
+            VendorsRepository.GetAllProducts();
             Message.Print("This is the list of vendors, for your convenience:", ConsoleColor.Yellow);
-            VendorsRepository.GetVendorsNames(vendorsAndProducts);
+            VendorsRepository.GetVendorsNames();
             WriteLine("In order to search the product catalog, please follow these instructions:\n\n- to search by vendor name input V and to search by product name input P,\n- then input the vendor name (just the first word of the name) or the product name or name of a part (just one word),\n- to view the products sorted by name input N or to view them sorted by price input P,\n- to view them in ascending order input A and to view them in descending order input D.\n\nExample search input:\n\nV bakery P A");
             Message.Print("Enter your input:", ConsoleColor.DarkCyan);
             string userSearchInput = ReadLine();
             string[] searchParameters = userSearchInput.Split(' ');
             if (searchParameters.Length == 4)
             {
-                UserInputServices.GetProductsBySearchInput(vendorsAndProducts, searchParameters);
+                UserInputServices.GetProductsBySearchInput(searchParameters);
             }
             else
             {
@@ -194,24 +196,24 @@ namespace Console_e_Shop_Library.Services
         #endregion
 
         #region Order a product method
-        public static void OrderProduct(User user, Dictionary<string, List<Product>> vendorsAndProducts)
+        public static void OrderProduct(User user)
         {
             Message.Print("To order a product, first type in the vendor name form the list:", ConsoleColor.DarkCyan);
-            VendorsRepository.GetVendorsNames(vendorsAndProducts);
+            VendorsRepository.GetVendorsNames();
             string vendorName = ReadLine();
-            string vendorNameKey = vendorsAndProducts.Where(kvp => kvp.Key.ToLower().Contains(vendorName.ToLower())).FirstOrDefault().Key;
+            string vendorNameKey = VendorsRepository.VendorsAndProducts.Where(kvp => kvp.Key.ToLower().Contains(vendorName.ToLower())).FirstOrDefault().Key;
             if (!string.IsNullOrEmpty(vendorNameKey) && !string.IsNullOrEmpty(vendorName))
             {
-                UserInputServices.GetVendorsProducts(vendorsAndProducts, vendorName);
+                UserInputServices.GetVendorsProducts(vendorName);
             }
             else
             {
                 Message.Print("Please try again and enter the vendor name correctly.", ConsoleColor.DarkRed);
-                OrderProduct(user, vendorsAndProducts);
+                OrderProduct(user);
             }
             Message.Print("Now, type in the number of the product and its quantity, separated by a space:", ConsoleColor.DarkCyan);
             string[] orderString = ReadLine().Split();
-            List<Product> vendorsProducts = UserInputServices.GetVendorsProductsAsList(vendorsAndProducts, vendorName);
+            List<Product> vendorsProducts = UserInputServices.GetVendorsProductsAsList(vendorName);
             if (orderString.Length == 2 && Int32.TryParse(orderString[0], out int productNumber) && productNumber > 0 && productNumber <= vendorsProducts.Count && Int32.TryParse(orderString[1], out int productQuantity) && productQuantity > 0)
             {
                 Product product = vendorsProducts[productNumber - 1];

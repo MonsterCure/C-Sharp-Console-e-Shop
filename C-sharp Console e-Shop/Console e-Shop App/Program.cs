@@ -26,7 +26,17 @@ namespace Console_e_Shop_App
         #region e-Shop main program method
         public static void EShopProgram(Dictionary<string, List<Product>> vendorsAndProducts, User user)
         {
-            WriteLine("Choose what you want to do:\n\n1. Get a list of all the vendors\n2. Search the product catalog by vendor name or product name\n3. Create an order for a product\n4. View the products in the shopping cart\n5. Remove an order for a product\n6. Get an order receipt, proceed to payment and provide a shipping address\n7. View your purchased orders\n8. Exit the shop\n");
+            WriteLine(
+                @"Choose what you want to do:
+
+1. Get a list of all the vendors
+2. Search the product catalog by vendor name or product name
+3. Create an order for a product
+4. View the products in the shopping cart
+5. Remove an order for a product
+6. Get an order receipt, proceed to payment and provide a shipping address
+7. View your purchased orders
+8. Exit the shop");
 
             string userInput = ReadLine();
             if (!Int32.TryParse(userInput, out int userInputNumber) || userInputNumber < 0 || userInputNumber > 9)
@@ -41,15 +51,15 @@ namespace Console_e_Shop_App
                 switch (userInputNumber)
                 {
                     case 1:
-                        VendorsRepository.GetVendorsNames(vendorsAndProducts);
+                        VendorsRepository.GetVendorsNames();
                         EShopProgram(vendorsAndProducts, user);
                         break;
                     case 2:
-                        UserInputServices.SearchProductCatalog(vendorsAndProducts);
+                        UserInputServices.SearchProductCatalog();
                         EShopProgram(vendorsAndProducts, user);
                         break;
                     case 3:
-                        UserInputServices.OrderProduct(user, vendorsAndProducts);
+                        UserInputServices.OrderProduct(user);
                         EShopProgram(vendorsAndProducts, user);
                         break;
                     case 4:
